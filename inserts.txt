@@ -1,0 +1,152 @@
+CREATE TABLE car
+(
+  id           BIGINT NOT NULL
+    CONSTRAINT car_pkey
+    PRIMARY KEY,
+  lastcheckup  TIMESTAMP,
+  number       VARCHAR(255),
+  status_id    BIGINT
+    CONSTRAINT fkl6kqygk53rqhvxypj6f7yadr3
+    REFERENCES carstatus,
+  conductor_id BIGINT
+    CONSTRAINT fk3dfuaskroobrjk6jbeva0i8fx
+    REFERENCES employee,
+  driver_id    BIGINT
+    CONSTRAINT fkkpw53yi07a9ss8u84holxgsia
+    REFERENCES employee,
+  route_id     BIGINT
+    CONSTRAINT fkf07lnwkxh7dhe9yoo4ls6ndep
+    REFERENCES route
+);
+
+
+CREATE TABLE carstatus
+(
+  id   BIGINT NOT NULL
+    CONSTRAINT carstatus_pkey
+    PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+CREATE TABLE driverlicense
+(
+  id              BIGINT NOT NULL
+    CONSTRAINT driverlicense_pkey
+    PRIMARY KEY,
+  category        VARCHAR(255),
+  dateapplication TIMESTAMP
+);
+
+CREATE TABLE drivers
+(
+  employee_id       BIGINT NOT NULL
+    CONSTRAINT fkq5rxjj0osexfqvdu98mjhoslc
+    REFERENCES employee,
+  driver_license_id BIGINT NOT NULL
+    CONSTRAINT fknen7j40s5y65qowvswvo75crf
+    REFERENCES driverlicense
+);
+
+CREATE TABLE employee
+(
+  id          BIGINT NOT NULL
+    CONSTRAINT employee_pkey
+    PRIMARY KEY,
+  experience  INTEGER,
+  father_name VARCHAR(255),
+  last_name   VARCHAR(255),
+  name        VARCHAR(255),
+  salary      INTEGER,
+  position_id BIGINT
+    CONSTRAINT fkirnj6mf3hxool2eei8htn55s8
+    REFERENCES position,
+  user_id     BIGINT
+    CONSTRAINT fkacyvum9mj8579s7owqg6jo9iy
+    REFERENCES "user"
+);
+
+
+CREATE TABLE position
+(
+  id   BIGINT NOT NULL
+    CONSTRAINT position_pkey
+    PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+CREATE TABLE route
+(
+  id      BIGINT NOT NULL
+    CONSTRAINT route_pkey
+    PRIMARY KEY,
+  name    VARCHAR(255),
+  type_id BIGINT
+    CONSTRAINT fkfwptfk600n9ylp1axf3tbjv8l
+    REFERENCES type
+);
+
+
+CREATE TABLE route_station
+(
+  route_id   BIGINT NOT NULL
+    CONSTRAINT fknu25usq5861wh1hqumwknqk96
+    REFERENCES route,
+  station_id BIGINT NOT NULL
+    CONSTRAINT fkc2all6ve67lqt6gxgo6vni8qd
+    REFERENCES station
+);
+
+
+CREATE TABLE station
+(
+  id   BIGINT NOT NULL
+    CONSTRAINT station_pkey
+    PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+-- auto-generated definition
+CREATE TABLE ticket
+(
+  id              BIGINT NOT NULL
+    CONSTRAINT ticket_pkey
+    PRIMARY KEY,
+  body            VARCHAR(255),
+  dateapplication TIMESTAMP,
+  email           VARCHAR(255),
+  name            VARCHAR(255),
+  theme           VARCHAR(255),
+  status_id       BIGINT
+    CONSTRAINT fkbioxnylueynyluxq93t6mi9ih
+    REFERENCES ticketstatus,
+  user_id         BIGINT
+    CONSTRAINT fk9srixlbq7h92nx9yjmnec7sdg
+    REFERENCES "user"
+);
+
+
+
+CREATE TABLE ticketstatus
+(
+  id   BIGINT NOT NULL
+    CONSTRAINT ticketstatus_pkey
+    PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+CREATE TABLE type
+(
+  id   BIGINT NOT NULL
+    CONSTRAINT type_pkey
+    PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+CREATE TABLE "user"
+(
+  id       BIGINT NOT NULL
+    CONSTRAINT user_pkey
+    PRIMARY KEY,
+  login    VARCHAR(255),
+  password VARCHAR(255)
+);
