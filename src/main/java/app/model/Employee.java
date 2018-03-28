@@ -1,9 +1,16 @@
 package app.model;
 
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 public class Employee {
     @Id
@@ -28,7 +35,7 @@ public class Employee {
 //    @Column(name = "position_id")
 //    private Integer position_id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

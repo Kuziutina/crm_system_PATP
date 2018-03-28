@@ -1,8 +1,15 @@
 package app.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "\"user\"")
 public class User {
@@ -14,8 +21,8 @@ public class User {
 
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private List<Employee> employee;
+    @OneToOne(mappedBy = "user")
+    private Employee employee;
 
     @OneToMany(mappedBy = "user")
     private List<Ticket> tickets;

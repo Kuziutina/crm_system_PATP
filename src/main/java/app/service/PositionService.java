@@ -1,5 +1,6 @@
 package app.service;
 
+import app.model.Car;
 import app.model.Position;
 import org.springframework.stereotype.Service;
 import app.repository.PositionRepository;
@@ -15,7 +16,7 @@ public class PositionService {
     }
 
     public void addNewPosition(String name) {
-        Position position = new Position(name);
+        Position position = Position.builder().name(name).build();
         positionRepository.save(position);
     }
 

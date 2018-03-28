@@ -20,10 +20,6 @@ public class Position {
 
     private String name;
 
-    public Position(String name) {
-        this.name = name;
-    }
-
     @OneToMany(mappedBy = "position")
     private List<Employee> employees;
 }
