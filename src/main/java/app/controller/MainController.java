@@ -1,22 +1,22 @@
 package app.controller;
 
+import app.service.NewsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import app.service.PositionService;
+import app.service.NewsService;
 
 @Controller
-@RequestMapping("/main")
+@RequestMapping("/crm/main")
 public class MainController {
-    private PositionService positionService;
-
-    public MainController(PositionService positionService) {
-        this.positionService = positionService;
-    }
+    @Autowired
+    public NewsService newsService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getMain(){
-        positionService.addNewPosition("vodit");
+    public String getMain(ModelMap map){
+        map.addAttribute("news", newsService.getAllNews());
         return "main";
     }
 }
