@@ -12,7 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
+@DiscriminatorColumn(name = "position_id")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Employee {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -51,7 +55,7 @@ public class Employee {
 
     @ManyToMany()
     @JoinTable(
-            name = "drivers",
+            name = "driver",
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "driver_license_id")}
     )

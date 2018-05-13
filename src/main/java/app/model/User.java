@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "\"users\"")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -20,6 +20,8 @@ public class User {
     private String login;
 
     private String password;
+
+    private String role;
 
     @OneToOne(mappedBy = "user")
     private Employee employee;
