@@ -1,11 +1,14 @@
 package app.service;
 
-import app.dn.UserRegisterDto;
+import app.dn.UserDTO;
+import app.dn.UserRegisterDTO;
+import app.form.UserUpdateForm;
 import app.model.User;
 import app.repository.UserRepository;
 import app.service.interfaces.UserServiceInt;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,7 +43,23 @@ public class UserService implements UserServiceInt {
         userRepository.delete(user);
     }
 
-    public User registerNewUserAccount(UserRegisterDto accountDto) {
+    @Override
+    public void update(long id, UserUpdateForm user) {
+        userRepository.update(id, user);
+    }
+
+    @Override
+    public List<UserDTO> getAllUserDTO() {
+        List<UserDTO> userDTOList = new ArrayList<>();
+        List<User> users = getAllUsers();
+        for(User u: users) {
+            userDTOList.add(UserDTO.getByUser(u));
+        }
+        return userDTOList;
+    }
+
+
+    public User registerNewUserAccount(UserRegisterDTO accountDto) {
         User user = User.builder().login(accountDto.getLogin())
                 .password(accountDto.getPassword())
                 .role("USER_ROLE")

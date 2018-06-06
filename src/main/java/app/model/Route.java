@@ -17,20 +17,21 @@ public class Route {
     private Long id;
 
     private String name;
-//    @Column(name = "type_id")
-//    private Integer type_id;
 
     @ManyToOne
     @JoinColumn(name = "type_id", referencedColumnName = "id")
     private Type type;
 
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "route_station",
             joinColumns = {@JoinColumn(name = "route_id")},
             inverseJoinColumns = {@JoinColumn(name = "station_id")}
     )
     private List<Station> stations;
+
+    @OneToMany(mappedBy = "route")
+    private List<Employee> employees;
 
     @OneToMany(mappedBy = "route")
     private List<Car> cars;

@@ -19,10 +19,12 @@ public class News {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    private String title;
+
     @Column(name = "type_info")
     private String typeInfo;
 
     private String info;
 
-    private Date date;
+
 }

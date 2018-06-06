@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.dn.UserRegisterDto;
+import app.dn.UserRegisterDTO;
 import app.model.User;
 import app.service.UserService;
 import app.validation.UserRegistrationValidator;
@@ -9,15 +9,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -39,20 +36,21 @@ public class RegistrationController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String showRegistrationForm(WebRequest request, ModelMap model) {
-        UserRegisterDto userDto = new UserRegisterDto();
+        UserRegisterDTO userDto = new UserRegisterDTO();
         model.addAttribute("user", userDto);
         return "registration";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String registerUserAccount(
-            @ModelAttribute("user") @Valid UserRegisterDto accountDto,
+            @Valid @ModelAttribute("accountDto") UserRegisterDTO accountDto,
             BindingResult result,
             ModelMap model) {
 
         model.addAttribute("user", accountDto);
         User registered = new User();
         if (!result.hasErrors()) {
+            System.out.println(accountDto);
             accountDto.setPassword(passwordEncoder.encode(accountDto.getPassword()));
             registered = createUserAccount(accountDto);
         }
@@ -71,7 +69,7 @@ public class RegistrationController {
             return "redirect: /main";
         }
     }
-    private User createUserAccount(UserRegisterDto accountDto) {
+    private User createUserAccount(UserRegisterDTO accountDto) {
         User registered = userService.registerNewUserAccount(accountDto);
         return registered;
     }

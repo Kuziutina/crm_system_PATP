@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import app.service.NewsService;
 
 @Controller
-@RequestMapping("/crm/main")
+@RequestMapping("/main")
 public class MainController {
     @Autowired
     public NewsService newsService;

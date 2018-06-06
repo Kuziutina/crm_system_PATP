@@ -41,11 +41,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-			.antMatchers("/crm/**").access("hasRole('USER_ROLE')")
+//			.antMatchers("/crm/**").access("hasRole('USER_ROLE')")
             .antMatchers("/registration").permitAll()
+			.antMatchers("/**").permitAll()
 			.and().formLogin()
 				.loginPage("/login")
 				.loginProcessingUrl("/login")
+				.defaultSuccessUrl("/main")
 				.permitAll()
 			.and().logout()
 				.logoutUrl("/logout")
@@ -56,8 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
 		http.rememberMe()
-				.key("remember-key")
-				.tokenValiditySeconds(300)
+				.key("uniqueAndSecret")
+				.tokenValiditySeconds(86400)
 				.tokenRepository(persistentTokenRepository())
 				.userDetailsService(userDetailsService);
 

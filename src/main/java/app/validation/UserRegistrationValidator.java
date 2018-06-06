@@ -1,14 +1,12 @@
 package app.validation;
 
-import app.dn.UserRegisterDto;
+import app.dn.UserRegisterDTO;
 import app.model.User;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import java.util.List;
 
 @Component
 public class UserRegistrationValidator implements Validator{
@@ -18,13 +16,13 @@ public class UserRegistrationValidator implements Validator{
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return clazz.getName().equals(UserRegisterDto.class.getName());
+        return clazz.getName().equals(UserRegisterDTO.class.getName());
     }
 
     @Override
     public void validate(Object target, Errors errors) {
         System.out.println("user register validator start validate");
-        UserRegisterDto userRegisterDto = (UserRegisterDto) target;
+        UserRegisterDTO userRegisterDto = (UserRegisterDTO) target;
 
         User sameLogin = userService.getUserByLogin(userRegisterDto.getLogin());
 

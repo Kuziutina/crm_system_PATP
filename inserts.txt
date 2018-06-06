@@ -37,7 +37,7 @@ CREATE TABLE driverlicense
   dateapplication TIMESTAMP
 );
 
-CREATE TABLE drivers
+CREATE TABLE driver
 (
   employee_id       BIGINT NOT NULL
     CONSTRAINT fkq5rxjj0osexfqvdu98mjhoslc

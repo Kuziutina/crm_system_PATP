@@ -3,6 +3,8 @@ package app.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Setter
@@ -18,24 +20,7 @@ public class Car {
 
     private String number;
 
-//    @Column(name = "route_id")
-//    private Integer route_id;
-//    @Column(name = "driver_id")
-//    private Integer driver_id;
-//    @Column(name = "conductor_id")
-//    private Integer conductor_id;
-//    @Column(name = "status_id")
-//    private Integer status_id;
-
-    private Date lastCheckup;
-
-    @ManyToOne
-    @JoinColumn(name = "driver_id", referencedColumnName = "id")
-    private Employee driver;
-
-    @ManyToOne
-    @JoinColumn(name = "conductor_id", referencedColumnName = "id")
-    private Employee conductor;
+    private Date lastCheckUp;
 
     @ManyToOne
     @JoinColumn(name = "route_id", referencedColumnName = "id")
@@ -44,4 +29,9 @@ public class Car {
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private CarStatus carStatus;
+
+    public String getLastCheckUpString() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(lastCheckUp);
+    }
 }

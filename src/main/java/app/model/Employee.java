@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@DiscriminatorColumn(name = "position_id")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Employee {
 
@@ -47,17 +46,10 @@ public class Employee {
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
 
-    @OneToMany(mappedBy = "driver")
-    private List<Car> carDriver;
+    @ManyToOne
+    @JoinColumn(name = "route_id", referencedColumnName = "id")
+    private Route route;
 
-    @OneToMany(mappedBy = "conductor")
-    private List<Car> carConductor;
-
-    @ManyToMany()
-    @JoinTable(
-            name = "driver",
-            joinColumns = {@JoinColumn(name = "employee_id")},
-            inverseJoinColumns = {@JoinColumn(name = "driver_license_id")}
-    )
-    private List<DriverLicense> driverLicenses;
+    @OneToOne(mappedBy = "employee", fetch = FetchType.LAZY)
+    private DriverLicense driverLicense;
 }

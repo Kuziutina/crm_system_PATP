@@ -17,7 +17,11 @@
         <#list items as item>
             <tr>
                 <th>${item.number}</th>
+                <th>${item.carStatus.name}</th>
+                <th>${item.driver.lastName}</th>
+                <th>${item.conductor.lastName}</th>
                 <th>${item.route.name}</th>
+                <th><a href="/cars/${item.id}">Подробнее</a> </th>
             </tr>
         </#list>
     </table>
