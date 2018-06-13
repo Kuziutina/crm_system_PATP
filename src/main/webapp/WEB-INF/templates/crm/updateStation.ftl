@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="heading">
-    <h1>Employee</h1>
+    <h1>Маршруты - станция</h1>
 </div>
 <div id="main-part">
 
@@ -20,7 +20,7 @@
 
     <table>
         <tr>
-            <th>name</th>
+            <th>Название</th>
             <th></th>
         </tr>
 

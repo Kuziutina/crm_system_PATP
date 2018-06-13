@@ -1,0 +1,3 @@
+INSERT INTO public.userdata (id, father_name, last_name, name, image_id, user_id, email) VALUES (68, '', '', 'd', null, 67, '');
+INSERT INTO public.userdata (id, father_name, last_name, name, image_id, user_id, email) VALUES (81, 'Кабиканович', 'Куртумин', 'Айрат', null, 80, null);
+INSERT INTO public.userdata (id, father_name, last_name, name, image_id, user_id, email) VALUES (111, 'Дмитриевич', 'Дарынинский', 'Марат', null, 110, null);

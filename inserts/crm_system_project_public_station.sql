@@ -1,0 +1,9 @@
+INSERT INTO public.station (id, name) VALUES (54, 'q');
+INSERT INTO public.station (id, name) VALUES (103, 'Адоратского');
+INSERT INTO public.station (id, name) VALUES (57, 'Солнышко');
+INSERT INTO public.station (id, name) VALUES (56, 'Чуйкова');
+INSERT INTO public.station (id, name) VALUES (53, 'Ибрагимова');
+INSERT INTO public.station (id, name) VALUES (104, 'Квартал');
+INSERT INTO public.station (id, name) VALUES (105, 'Кольцо');
+INSERT INTO public.station (id, name) VALUES (106, 'Восстания');
+INSERT INTO public.station (id, name) VALUES (107, 'Роддом');

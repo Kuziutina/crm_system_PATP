@@ -1,0 +1,24 @@
+.item{
+    background-color: #d0e8ea;
+    border: 3px solid #bbdae1;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 10px 5px 10px;
+}
+
+.item-title{
+    font-size: 19px;
+    margin-left: 35px;
+    margin-top: 10px;
+}
+
+.item-status {
+    color: red;
+}
+.item-body, .item-theme{
+    font-size: 18px;
+    margin: 7px 7px 14px 30px;
+}
+
+body {
+    background-color: #f0f8ff;
+}

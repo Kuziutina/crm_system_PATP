@@ -23,8 +23,8 @@ public class EmployeeValidator implements Validator{
     private PositionServiceInt positionService;
 
     private final List<String> positionsForRoute= new ArrayList<String>(){{
-        add("driver");
-        add("conductor");
+        add("Водитель");
+        add("Кондуктор");
     }};
 
 

@@ -8,6 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class UserUpdateForm {
-    private String login;
-    private String role;
+    private String lastName;
+    private String name;
+    private String fatherName;
+    private String email;
 }

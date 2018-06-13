@@ -1,4 +1,4 @@
-package app.dn;
+package app.dto;
 
 import app.model.Ticket;
 import lombok.*;

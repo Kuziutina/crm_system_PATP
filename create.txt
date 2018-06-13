@@ -1,0 +1,247 @@
+CREATE SEQUENCE hibernate_sequence;
+
+CREATE TABLE persistent_logins
+(
+  username  VARCHAR(64) NOT NULL,
+  series    VARCHAR(64) NOT NULL
+    CONSTRAINT persistent_logins_pkey
+    PRIMARY KEY,
+  token     VARCHAR(64) NOT NULL,
+  last_used TIMESTAMP   NOT NULL
+);
+
+CREATE TABLE car
+(
+  id          BIGINT NOT NULL
+    CONSTRAINT car_pkey
+    PRIMARY KEY,
+  lastcheckup TIMESTAMP,
+  number      VARCHAR(255),
+  status_id   BIGINT,
+  route_id    BIGINT
+);
+
+CREATE TABLE carstatus
+(
+  id   BIGINT NOT NULL
+    CONSTRAINT carstatus_pkey
+    PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+ALTER TABLE car
+  ADD CONSTRAINT fkl6kqygk53rqhvxypj6f7yadr3
+FOREIGN KEY (status_id) REFERENCES carstatus;
+
+CREATE TABLE driverlicense
+(
+  id              BIGINT           NOT NULL
+    CONSTRAINT driverlicense_pkey
+    PRIMARY KEY,
+  category        VARCHAR(255),
+  dateapplication TIMESTAMP,
+  info            VARCHAR(255) DEFAULT '' :: CHARACTER VARYING,
+  employee_id     BIGINT DEFAULT 1 NOT NULL
+);
+
+CREATE UNIQUE INDEX driverlicense_employee_id_uindex
+  ON driverlicense (employee_id);
+
+CREATE TABLE employee
+(
+  id          BIGINT NOT NULL
+    CONSTRAINT employee_pkey
+    PRIMARY KEY,
+  experience  INTEGER,
+  father_name VARCHAR(255),
+  last_name   VARCHAR(255),
+  name        VARCHAR(255),
+  salary      INTEGER,
+  position_id BIGINT,
+  route_id    BIGINT,
+  user_id     BIGINT
+);
+
+ALTER TABLE driverlicense
+  ADD CONSTRAINT driverlicense_employee___fk
+FOREIGN KEY (employee_id) REFERENCES employee
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE driverlicense
+  ADD CONSTRAINT fk1dy2grjp1xe96e7wl2lxxiarg
+FOREIGN KEY (employee_id) REFERENCES employee;
+
+CREATE TABLE position
+(
+  id   BIGINT NOT NULL
+    CONSTRAINT position_pkey
+    PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+ALTER TABLE employee
+  ADD CONSTRAINT fkirnj6mf3hxool2eei8htn55s8
+FOREIGN KEY (position_id) REFERENCES position;
+
+CREATE TABLE route
+(
+  id      BIGINT NOT NULL
+    CONSTRAINT route_pkey
+    PRIMARY KEY,
+  name    VARCHAR(255),
+  type_id BIGINT
+);
+
+ALTER TABLE car
+  ADD CONSTRAINT fkf07lnwkxh7dhe9yoo4ls6ndep
+FOREIGN KEY (route_id) REFERENCES route;
+
+ALTER TABLE employee
+  ADD CONSTRAINT fk9ekaywvgkvb6uaevsc7e0mwti
+FOREIGN KEY (route_id) REFERENCES route;
+
+CREATE TABLE route_station
+(
+  route_id   BIGINT NOT NULL
+    CONSTRAINT fknu25usq5861wh1hqumwknqk96
+    REFERENCES route
+    ON UPDATE CASCADE ON DELETE SET NULL,
+  station_id BIGINT NOT NULL
+);
+
+CREATE TABLE site_news
+(
+  id        BIGINT NOT NULL
+    CONSTRAINT site_news_pkey
+    PRIMARY KEY,
+  info      VARCHAR(255),
+  type_info VARCHAR(255),
+  title     VARCHAR(255)
+);
+
+CREATE TABLE station
+(
+  id   BIGINT NOT NULL
+    CONSTRAINT station_pkey
+    PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+ALTER TABLE route_station
+  ADD CONSTRAINT fkc2all6ve67lqt6gxgo6vni8qd
+FOREIGN KEY (station_id) REFERENCES station
+ON UPDATE CASCADE ON DELETE SET NULL;
+
+CREATE TABLE ticket
+(
+  id              BIGINT NOT NULL
+    CONSTRAINT ticket_pkey
+    PRIMARY KEY,
+  body            VARCHAR(255),
+  dateapplication TIMESTAMP DEFAULT now(),
+  email           VARCHAR(255),
+  name            VARCHAR(255),
+  theme           VARCHAR(255),
+  status_id       BIGINT,
+  user_id         BIGINT
+);
+
+CREATE TABLE ticketstatus
+(
+  id   BIGINT NOT NULL
+    CONSTRAINT ticketstatus_pkey
+    PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+ALTER TABLE ticket
+  ADD CONSTRAINT fkbioxnylueynyluxq93t6mi9ih
+FOREIGN KEY (status_id) REFERENCES ticketstatus;
+
+CREATE TABLE type
+(
+  id   BIGINT NOT NULL
+    CONSTRAINT type_pkey
+    PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+ALTER TABLE route
+  ADD CONSTRAINT fkfwptfk600n9ylp1axf3tbjv8l
+FOREIGN KEY (type_id) REFERENCES type;
+
+CREATE TABLE users
+(
+  id       BIGINT NOT NULL
+    CONSTRAINT users_pkey
+    PRIMARY KEY,
+  login    VARCHAR(255),
+  password VARCHAR(255),
+  role     VARCHAR(255)
+);
+
+ALTER TABLE employee
+  ADD CONSTRAINT fk4sb0yhfrr9bt93wbkno916rqn
+FOREIGN KEY (user_id) REFERENCES users
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE ticket
+  ADD CONSTRAINT fks87fpgntbi09sri7yrn5puk4w
+FOREIGN KEY (user_id) REFERENCES users;
+
+CREATE TABLE image
+(
+  id       BIGSERIAL   NOT NULL
+    CONSTRAINT image_pkey
+    PRIMARY KEY,
+  filename VARCHAR(255),
+  path     VARCHAR(255),
+  type     VARCHAR(255),
+  dtype    VARCHAR(31) NOT NULL,
+  user_id  BIGINT
+    CONSTRAINT fke7341456pf0f4ouq0p18vptu1
+    REFERENCES users
+);
+
+CREATE TABLE userdata
+(
+  id          BIGINT NOT NULL
+    CONSTRAINT userdata_pkey
+    PRIMARY KEY,
+  father_name VARCHAR(255) DEFAULT '' :: CHARACTER VARYING,
+  last_name   VARCHAR(255) DEFAULT '' :: CHARACTER VARYING,
+  name        VARCHAR(255) DEFAULT '' :: CHARACTER VARYING,
+  image_id    BIGINT
+    CONSTRAINT fkfqguh8mgpm2xmrb8xug8gw8rx
+    REFERENCES image,
+  user_id     BIGINT
+    CONSTRAINT fknma896kyd71nnke53k6yrvp3d
+    REFERENCES users,
+  email       VARCHAR(255) DEFAULT '' :: CHARACTER VARYING
+);
+
+CREATE TABLE message
+(
+  id           BIGINT NOT NULL
+    CONSTRAINT message_pkey
+    PRIMARY KEY,
+  body         VARCHAR(255),
+  date         TIMESTAMP,
+  recipient_id BIGINT
+    CONSTRAINT fkib3ncocj38mewac00dcrac1f2
+    REFERENCES users,
+  sender_id    BIGINT
+    CONSTRAINT fkf4o8xhsphwu6954xui1w47uo9
+    REFERENCES users
+);
+
+CREATE FUNCTION update_changetimestamp_column()
+  RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  NEW.last_used = now();
+  RETURN NEW;
+END;
+$$;
+

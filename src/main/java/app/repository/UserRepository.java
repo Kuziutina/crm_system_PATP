@@ -13,6 +13,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findOneByLogin(String login);
+    User findOneByLoginAndPasswordAndRole(String login, String password, String role);
 
 
     @Modifying

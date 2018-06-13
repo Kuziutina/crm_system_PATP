@@ -1,30 +1,45 @@
+<#include "base.ftl">
+
 <html>
 <head>
-    <meta charset="UTF-8" content="text/html">
-    <#--<link rel="stylesheet" href="/css/bootstrap.css">-->
-    <#--<link href="/css/magazine_site.css" rel="stylesheet">-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <#--<title>MagazineSite</title>-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <@head/>
+    <link rel="stylesheet" href="/stat/css/main.css">
+
 </head>
-<body>
-<div id="heading">
-    <h1>Страничка feedback</h1>
+<body class="container">
+<@header/>
+<@menu/>
+<div id="heading" class="col-md-10 col-md-offset-2">
+    <h1>Оставить отзыв</h1>
 </div>
-<div id="main-part">
+<div id="main-part" class="col-md-8 col-md-offset-2">
     <div id="result">
 
     </div>
     <#--<form action="/feedback/add" method="post">-->
-        <#if user??>
-            <input id="name" type="text" value="${user.login}">
-        <#else>
-            <input id="name" type="text" >
-        </#if>
-        <input id="theme" type="text">
-        <textarea id="body"></textarea>
+        <div class="form-label-group validation">
+            <label for="name">Ваше имя или логин</label></br>
+            <#if user??>
+                <input class="form-control" id="name" required type="text" value="${user.login}">
+            <#else>
+                <input class="form-control" id="name" required type="text" >
+            </#if>
+            <span class="validity"></span>
+        </div>
+        <div class="form-label-group validation">
+            <label for="theme">Заголовок (также может быть указан номер маршрута)</label></br>
+            <input class="form-control" id="theme" required type="text">
+            <span class="validity"></span>
+        </div>
+        <div class="form-label-group validation">
+            <label for="body">Ваш отзыв</label></br>
+            <textarea class="form-control" required id="body"></textarea>
+            <span class="validity"></span>
+        </div>
 
-        <button onclick="send_feedback()" type="button">Send</button>
+
+
+        <button class="btn btn-primary" onclick="send_feedback()" type="button">Send</button>
     <#--</form>-->
 </div>
 </body>
@@ -36,6 +51,7 @@
         feedback["name"] = $("#name").val();
         feedback["theme"] = $("#theme").val();
         feedback["body"] = $("#body").val();
+        feedback["userId"] = <#if user??>${user.id}<#else> 0 </#if>;
         // console.log(text + "  " + recipient);
         if (feedback["body"] != "" && feedback["name"] != "" ){
             $.ajax({
@@ -90,12 +106,7 @@
 
     }
 </script>
-<footer>
-    <#--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>-->
-    <#--<script src="/js/bootstrap.js"></script>-->
-    <#--<script src="/js/horizontal_tab.js"></script>-->
-    <#--<script src="/js/module_wind.js"></script>-->
-</footer>
+
 
 
 

@@ -53,6 +53,12 @@ public class RestController {
         webDataBinder.addValidators(carValidator);
     }
 
+
+    @GetMapping
+    public String getMain() {
+        return "crm";
+    }
+
     @GetMapping(value = "/employees")
     public String getAllEmployees(ModelMap modelMap) {
         modelMap.addAttribute("employees", employeeService.getAllEmployees());
@@ -289,16 +295,23 @@ public class RestController {
         return "crm/tickets";
     }
 
-    @PostMapping(value = "/tickets")
+    @GetMapping(value = "/tickets/param")
     public String getPartTickets(Model model, @RequestParam("status") String status) {
         System.out.println(status);
-        if (status.equals("Любой")) {
+        if (status.equals("Все")) {
             model.addAttribute("tickets", ticketService.getAllTickets());
         }
         else {
             model.addAttribute("tickets", ticketService.getAllTicketsByStatus(status));
         }
         return "crm/tickets";
+    }
+
+    @PostMapping(value = "/ticket/change")
+    public @ResponseBody JSONObjectForm changeTicket(@RequestBody TicketChangeForm ticketChangeForm) {
+        ticketService.update(ticketChangeForm);
+        System.out.println(ticketChangeForm.getId() + "   " + ticketChangeForm.getStatus());
+        return new JSONObjectForm();
     }
 
 }

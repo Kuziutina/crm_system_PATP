@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="heading">
-    <h1>Driver Licenses</h1>
+    <h1>Водительские права</h1>
 </div>
 <div id="main-part">
 

@@ -1,0 +1,26 @@
+.news{
+    background-color: #d0e8ea;
+    border: 3px solid #bbdae1;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 10px 5px 10px;
+}
+
+.news-name{
+    font-size: 19px;
+    margin-left: 35px;
+    margin-top: 10px;
+}
+.news-body{
+    font-size: 16px;
+    margin: 7px 7px 14px 30px;
+}
+
+body {
+    background-color: #f0f8ff;
+}
+
+
+a:link {color: black;}      /* unvisited link */
+a:visited {color: black;}   /* visited link */
+a:hover {color: black;}     /* mouse over link */
+a:active {color: black;}

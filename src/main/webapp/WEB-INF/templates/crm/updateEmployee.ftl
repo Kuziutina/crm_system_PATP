@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="heading">
-    <h1>Employee</h1>
+    <h1>Работники</h1>
 </div>
 <div id="main-part">
 

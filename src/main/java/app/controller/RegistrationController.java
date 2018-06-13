@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.dn.UserRegisterDTO;
+import app.dto.UserRegisterDTO;
 import app.model.User;
 import app.service.UserService;
 import app.validation.UserRegistrationValidator;
@@ -66,9 +66,15 @@ public class RegistrationController {
             return "registration";
         }
         else {
-            return "redirect: /main";
+            return "redirect: /registration/success";
         }
     }
+
+    @RequestMapping(value = "/success", method = RequestMethod.GET)
+    public String showSuccess() {
+        return "success_registration";
+    }
+
     private User createUserAccount(UserRegisterDTO accountDto) {
         User registered = userService.registerNewUserAccount(accountDto);
         return registered;

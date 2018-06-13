@@ -28,11 +28,6 @@ public class UserRestController {
         return "change_user";
     }
 
-    @PostMapping(value = "/{id}/change")
-    public String changeUserPost(@PathVariable(name = "id") long id,@ModelAttribute(name = "changeUser") UserUpdateForm userUpdateForm) {
-        userServiceInt.update(id, userUpdateForm);
-        return "redirect: /user/"+id+"";
-    }
 
     @PostMapping(value = "/{id}/delete")
     public String deleteUserPost(@PathVariable(name = "id") long id) {

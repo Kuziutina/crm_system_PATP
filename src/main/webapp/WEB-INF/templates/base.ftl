@@ -20,14 +20,21 @@
         <section class="drawer-list">
             <ul>
                 <li><a href="/main">Главная</a></li>
-                <li><a href="#">notifications</a></li>
-                <li><a href="#">system administration</a></li>
-                <li><a href="#">support</a></li>
+                <li><a href="/feedback/create">Оставить отзыв</a></li>
+                <li><a href="/ticket/create">Оставить заявку</a></li>
                 <#if user??>
+
                     <li><a href="/profile">Личный кабинет</a></li>
                     <#if user.role == "MANAGER_ROLE">
+                        <li><a href="/profile/messages">Сообщения</a></li>
                         <li><a href="/crm">CRM</a></li>
+                        <li><a href="/employees">Работники</a> </li>
                     </#if>
+                    <#if user.role == "EMPLOYEE_ROLE">
+                        <li><a href="/profile/messages">Сообщения</a></li>
+                        <li><a href="/employees">Работники</a> </li>
+                    </#if>
+                    <li><a href="/logout">Выход</a></li>
                 <#else>
                     <li><a href="/login">Вход</a></li>
                     <li><a href="/registration">Регистрация</a></li>
@@ -43,7 +50,7 @@
             <a href="/main" class="logo">
                 <img src="">
             </a>
-            <div class="col-md-4 title">
+            <div class="col-md-4 col-md-offset-4 title">
                 <h1>ПАССАЖИРСКОЕ АВТОТРАНСПОРТНОЕ ПРЕДПРИЯТИЕ №2</h1>
             </div>
         </div>

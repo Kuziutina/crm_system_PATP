@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -35,4 +36,19 @@ public class Route {
 
     @OneToMany(mappedBy = "route")
     private List<Car> cars;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Route route = (Route) o;
+        return Objects.equals(id, route.id) &&
+                Objects.equals(name, route.name) &&
+                Objects.equals(type.getName(), route.type.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, type.getName());
+    }
 }

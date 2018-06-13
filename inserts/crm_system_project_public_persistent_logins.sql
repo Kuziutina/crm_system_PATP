@@ -1,0 +1,3 @@
+INSERT INTO public.persistent_logins (username, series, token, last_used) VALUES ('admin', 'x1x4ldJcxEq9YmxZomFOOg==', 'nKQH0ltx1j/N0GXWEctyXA==', '2018-05-27 17:20:07.666000');
+INSERT INTO public.persistent_logins (username, series, token, last_used) VALUES ('User', 'rYnPUSIp+jjbQAXVY3gNvg==', 'yiTDsxGgQ5RNa0Y5xJ2PCg==', '2018-06-13 14:23:20.462000');
+INSERT INTO public.persistent_logins (username, series, token, last_used) VALUES ('Keks', 'zyFw6Fz9cjbN5KanqOD5Bw==', 'PP5mo+T94V6MfdN8m/wTNQ==', '2018-06-07 07:27:50.893000');

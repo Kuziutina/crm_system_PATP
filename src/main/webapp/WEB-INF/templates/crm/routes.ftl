@@ -1,84 +1,65 @@
+<#include "../base.ftl">
 <html>
 <head>
     <#--<meta charset="UTF-8" content="text/html">-->
     <head>
-        <link rel="stylesheet" type="text/css" href="/stat/bootstrap/bootstrap-3.3.2-dist/css/bootstrap.min.css"/>
-        <script src="/stat/js/jquery.js"></script>
-        <script src="/stat/bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+        <@head/>
     </head>
     <title>List</title>
 <#--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 </head>
 <body>
-<div id="heading">
-    <h1>Car</h1>
+<@header/>
+<@menu/>
+<div class="container" id="heading">
+    <div class="row">
+        <h1 class="title col-md-12">Маршруты</h1>
+    </div>
 </div>
-<div id="main-part">
+<div id="main-part" class="container">
+    <div class="col-md-12">
 
-    <input id="routes-station-filter" type="text" placeholder="search" onchange="doFilter()">
+        <input id="routes-station-filter" type="text" placeholder="search" onchange="doFilter()">
+    </div>
     <#if error??>
         <p>${error}</p>
     </#if>
 
-    <table>
-        <tr>
-            <th>Маршрут</th>
-            <th>Тип</th>
-            <th></th>
-            <th></th>
-            <th>Остановка</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </table>
-        <div id="routes-list">
-            <table>
+    <p class="col-md-1">Маршрут</p>
+    <p class="col-md-1">Тип</p>
+    <p class="col-md-1 col-md-offset-2">Остановка</p>
+
+    <div id="routes-list">
         <#list routes as route>
-            <tr>
-                <th>${route.name}</th>
-                <th>${route.type.name}</th>
-                <th><a href="/crm/routes/${route.id}/change">update</a> </th>
-                <th><a href="/crm/routes/${route.id}/delete">delete</a> </th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
+            <div class="col-md-12 route-item">
+                <p class="col-md-1">${route.name}</p>
+                <p class="col-md-1">${route.type.name}</p>
+                <div class="col-md-1 ref"><a href="/crm/routes/${route.id}/change">update</a> </div>
+                <div class="col-md-1 ref"><a href="/crm/routes/${route.id}/delete">delete</a> </div>
+            </div>
+
             <#list route.stations as station>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>${station.name}</th>
-                <th><a href="/crm/routes/station/${station.id}/change">change</a> </th>
-                <th><a href="/crm/routes/${route.id}/station/${station.id}/delete">delete</a> </th>
-            </tr>
+                <div class="col-md-12 station-item">
+                    <p class="col-md-1 col-md-offset-4">${station.name}</p>
+                    <div class="col-md-1 ref"><a href="/crm/routes/station/${station.id}/change">change</a> </div>
+                    <div class="col-md-1 ref"><a href="/crm/routes/${route.id}/station/${station.id}/delete">delete</a> </div>
+                </div>
             </#list>
-        <form action="/crm/routes/${route.id}/station/add" method="post" modelAttribute="addStation">
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th><input type="text" name="name"></th>
-            <th><input type="submit"></th>
-            <th></th>
-        </tr>
-        </form>
+            <div class="col-md-12 form-station">
+                <form action="/crm/routes/${route.id}/station/add" method="post" modelAttribute="addStation">
+                    <div class="col-md-1 col-md-offset-4"><input class="col-md-12" type="text" name="name"></div>
+                    <div class="col-md-1"><input type="submit" value="Добавить"></div>
+                </form>
+            </div>
         </#list>
-        <form action="/crm/routes/add" method="post" modelAttribute="addRoute">
-            <tr>
-                <th><input type="text" name="name"></th>
-                <th><input type="text" name="type"></th>
-                <th><input type="submit" value="ok"></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </form>
-            </table>
+        <div class="col-md-12 form-route">
+            <form action="/crm/routes/add" method="post" modelAttribute="addRoute">
+                <div class="col-md-1"><input class="col-md-12" type="text" name="name"></div>
+                <div class="col-md-1"><input class="col-md-12" type="text" name="type"></div>
+                <div class="col-md-1"><input type="submit" value="Добавить"></div>
+            </form>
         </div>
+    </div>
 
 </div>
 <script>
@@ -122,51 +103,37 @@
         $('#routes-list').html('');
         for(var i = 0; i < routes.length; i++) {
             var route = routes[i];
-            $('#routes-list').append('<tr>' +
-'                <th>'+ route.name + '</th>' +
-'                <th>' + route.type + '</th>' +
-'                <th><a href="/crm/routes/' + route.id + '/change">update</a> </th>' +
-'                <th><a href="/crm/routes/' + route.id + '/delete">delete</a> </th>' +
-'                <th></th>' +
-'                <th></th>' +
-'                <th></th>' +
-'            </tr>');
+            $('#routes-list').append(
+'                <p class="col-md-1">'+ route.name + '</p>' +
+'                <p class="col-md-1">' + route.type + '</p>' +
+'                <p class="col-md-1"><a href="/crm/routes/' + route.id + '/change">update</a> </p>' +
+'                <p class="col-md-1"><a href="/crm/routes/' + route.id + '/delete">delete</a> </p>' +
+                    '<p class="col-md-6"></p> ' +
+                    '</br>');
             var stations = route.stations;
             for (var j = 0; j < stations.length; j++) {
-                $('#routes-list').append('<tr>' +
-                '                <th></th>' +
-                '                <th></th>' +
-                '                <th></th>' +
-                '                <th></th>' +
-                '                <th>' + stations[j].name + '</th>' +
-                '                <th><a href="/crm/routes/station/' + stations[j].id + '/change">change</a> </th>' +
-                '                <th><a href="/crm/routes/' + route.id + '/station/' + stations[j].id + '/delete">delete</a> </th>' +
-                '            </tr>\n');
+                $('#routes-list').append(
+                '                <p class="col-md-1 col-md-offset-4">' + stations[j].name + '</p>' +
+                '                <p class="col-md-1"><a href="/crm/routes/station/' + stations[j].id + '/change">change</a> </p>' +
+                '                <p class="col-md-1"><a href="/crm/routes/' + route.id + '/station/' + stations[j].id + '/delete">delete</a> </p>' +
+                        '<p class="col-md-3"></p> ' +
+                '            </br>');
             }
-            $('#routes-list').append('<form action="/crm/routes/' + route.id + '/station/add" method="post" modelAttribute="addStation">' +
-                    '        <tr>' +
-                    '            <th></th>' +
-                    '            <th></th>' +
-                    '            <th></th>' +
-                    '            <th></th>' +
-                    '            <th><input type="text" name="name"></th>' +
-                    '            <th><input type="submit"></th>' +
-                    '            <th></th>' +
-                    '        </tr>' +
+            $('#routes-list').append('<form class="col-md-12" action="/crm/routes/' + route.id + '/station/add" method="post" modelAttribute="addStation">' +
+                    '            <div class="col-md-1 col-md-offset-4"><input class="col-md-12" type="text" name="name"></div>' +
+                    '            <div class="col-md-1"><input type="submit" value="Добавить"></div>' +
+                    '<p class="col-md-4">  </p>' +
                     '        </form>' +
-                    '        <form action="/crm/routes/add" method="post" modelAttribute="addRoute">' +
-                    '            <tr>' +
-                    '                <th><input type="text" name="name"></th>' +
-                    '                <th><input type="text" name="type"></th>' +
-                    '                <th><input type="submit" value="ok"></th>' +
-                    '                <th></th>' +
-                    '                <th></th>' +
-                    '                <th></th>' +
-                    '                <th></th>' +
-                    '            </tr>' +
-                    '        </form>');
+                    '</br>');
 
         }
+        $('#routes-list').append('<form class="col-md-12" action="/crm/routes/add" method="post" modelAttribute="addRoute">' +
+        '                <div class="col-md-1"><input class="col-md-12" type="text" name="name"></div>' +
+        '                <div class="col-md-1"><input class="col-md-12" type="text" name="type"></div>' +
+        '                <div class="col-md-1"><input class="col-md-12" type="submit" value="Добавить"></div>' +
+        '                <p class="col-md-7 col-md"></p> '+
+        '        </form>' +
+        '</br>');
     }
 </script>
 

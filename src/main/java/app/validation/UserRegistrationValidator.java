@@ -1,6 +1,6 @@
 package app.validation;
 
-import app.dn.UserRegisterDTO;
+import app.dto.UserRegisterDTO;
 import app.model.User;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

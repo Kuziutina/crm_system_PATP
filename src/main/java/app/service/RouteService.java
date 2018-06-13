@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RouteService implements RouteServiceInt {
@@ -91,12 +93,14 @@ public class RouteService implements RouteServiceInt {
             stationName = "";
         }
         List<Station> stations = stationService.findByPartName(stationName);
-        List<Route> simple_routes = new ArrayList<>();
+        Set<Route> simple_routes = new HashSet<>();
         List<RouteDTO> routes = new ArrayList<>();
         for (Station station: stations) {
             simple_routes.addAll(routeRepository.findAllByStationsContaining(station));
         }
+        System.out.println("NEW");
         for (Route route: simple_routes) {
+            System.out.println(route.getName());
             routes.add(createRouteDTO(route));
         }
         return routes;

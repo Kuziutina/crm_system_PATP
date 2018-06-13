@@ -22,4 +22,8 @@ public class JSONObjectForm implements Serializable{
         errors = new ArrayList<>();
     }
 
+    public JSONObjectForm(String message) {
+        errors = new ArrayList<>();
+        this.message = message;
+    }
 }

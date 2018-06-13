@@ -1,4 +1,4 @@
-package app.dn;
+package app.dto;
 
 import app.model.User;
 import lombok.*;
@@ -18,11 +18,13 @@ public class UserDTO {
     @NotEmpty
     private String login;
     private String role;
+    private String password;
 
     private UserDTO(User user) {
         this.id = user.getId();
         this.login = user.getLogin();
         this.role = user.getRole();
+        this.password = user.getPassword();
     }
 
     public static UserDTO getByUser(User user) {

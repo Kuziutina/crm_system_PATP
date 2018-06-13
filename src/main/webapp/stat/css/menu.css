@@ -70,7 +70,7 @@ ul {
 }
 @media (min-width: 768px) {
   .drawer-list {
-    width: 40vw;
+    width: 20vw;
   }
 }
 .drawer-list ul {

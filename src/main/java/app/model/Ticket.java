@@ -3,6 +3,8 @@ package app.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Setter
@@ -35,5 +37,10 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private TicketStatus ticketStatus;
+
+    public String getDateString() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(dateApplication);
+    }
 
 }

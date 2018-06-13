@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="heading">
-    <h1>Car</h1>
+    <h1>Машины</h1>
 </div>
 <div id="main-part">
 

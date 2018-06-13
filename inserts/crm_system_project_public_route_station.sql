@@ -1,0 +1,12 @@
+INSERT INTO public.route_station (route_id, station_id) VALUES (1, 57);
+INSERT INTO public.route_station (route_id, station_id) VALUES (55, 56);
+INSERT INTO public.route_station (route_id, station_id) VALUES (55, 53);
+INSERT INTO public.route_station (route_id, station_id) VALUES (55, 104);
+INSERT INTO public.route_station (route_id, station_id) VALUES (102, 103);
+INSERT INTO public.route_station (route_id, station_id) VALUES (102, 104);
+INSERT INTO public.route_station (route_id, station_id) VALUES (55, 104);
+INSERT INTO public.route_station (route_id, station_id) VALUES (55, 105);
+INSERT INTO public.route_station (route_id, station_id) VALUES (102, 105);
+INSERT INTO public.route_station (route_id, station_id) VALUES (55, 106);
+INSERT INTO public.route_station (route_id, station_id) VALUES (55, 107);
+INSERT INTO public.route_station (route_id, station_id) VALUES (102, 107);

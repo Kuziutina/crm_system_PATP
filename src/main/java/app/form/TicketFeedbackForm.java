@@ -16,6 +16,7 @@ public class TicketFeedbackForm implements Serializable{
     private String email;
     private String theme;
     private String body;
+    private long userId;
 
 //    private Date date;
 
