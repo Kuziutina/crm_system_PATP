@@ -1,0 +1,5 @@
+INSERT INTO public.employee (id, experience, father_name, last_name, name, salary, position_id, route_id, user_id) VALUES (125, 2, 'ne', 'ne', 'ne', 2, 3, null, 124);
+INSERT INTO public.employee (id, experience, father_name, last_name, name, salary, position_id, route_id, user_id) VALUES (127, 5, 'fkjdbr', 'krf', 'kjbrf', 3, 3, null, 126);
+INSERT INTO public.employee (id, experience, father_name, last_name, name, salary, position_id, route_id, user_id) VALUES (99, 7, 'Евгеньевич', 'Арбузов', 'Клим', 17000, 3, null, 98);
+INSERT INTO public.employee (id, experience, father_name, last_name, name, salary, position_id, route_id, user_id) VALUES (101, 5, 'Айдарович', 'Куровский', 'Михаил', 56000, 3, null, 100);
+INSERT INTO public.employee (id, experience, father_name, last_name, name, salary, position_id, route_id, user_id) VALUES (93, 6, 'Павлович', 'Кен', 'Дамир', 12000, 1, 1, 92);

@@ -1,0 +1,3 @@
+INSERT INTO public.image (id, filename, path, type, dtype, user_id) VALUES (2, 'b2fdfed5-b97a-4044-b1a8-e1a1636dbf1b.JPG', 'D:\project_image/b2fdfed5-b97a-4044-b1a8-e1a1636dbf1b.JPG', 'image/jpeg', 'user', 67);
+INSERT INTO public.image (id, filename, path, type, dtype, user_id) VALUES (4, '4a4bd014-bc2f-4cb5-b5f9-21f7aaf3e910.jpg', 'D:\project_image/4a4bd014-bc2f-4cb5-b5f9-21f7aaf3e910.jpg', 'image/jpeg', 'user', 58);
+INSERT INTO public.image (id, filename, path, type, dtype, user_id) VALUES (5, '3d7f6a7d-b074-4a42-9037-871e3af7a33f.jpg', 'D:\project_image/3d7f6a7d-b074-4a42-9037-871e3af7a33f.jpg', 'image/jpeg', 'user', 110);
